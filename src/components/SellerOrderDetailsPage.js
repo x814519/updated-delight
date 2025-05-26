@@ -52,6 +52,7 @@ const SellerOrderDetailsPage = () => {
   const [passwordDialogOpen, setPasswordDialogOpen] = useState(false);
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [successDialogOpen, setSuccessDialogOpen] = useState(false);
 
   // Function to refresh authentication state
   const refreshAuthState = async () => {
@@ -222,6 +223,10 @@ const SellerOrderDetailsPage = () => {
     openPasswordDialog();
   };
 
+  const handleCloseSuccessDialog = () => {
+    setSuccessDialogOpen(false);
+  };
+
   const processOrderPickup = async () => {
     try {
       setLoading(true);
@@ -316,7 +321,7 @@ const SellerOrderDetailsPage = () => {
         pickedAt: new Date(),
       }));
 
-      alert("Order picked successfully. Processing will begin shortly!");
+      setSuccessDialogOpen(true);
       
     } catch (error) {
       console.error("Error picking order:", error);
@@ -950,6 +955,27 @@ const SellerOrderDetailsPage = () => {
             startIcon={loading ? <CircularProgress size={20} /> : <CheckIcon />}
           >
             {loading ? "Verifying..." : "Confirm"}
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog
+        open={successDialogOpen}
+        onClose={handleCloseSuccessDialog}
+        aria-labelledby="success-dialog-title"
+        aria-describedby="success-dialog-description"
+      >
+        <DialogTitle id="success-dialog-title">
+          Order Picked Successfully
+        </DialogTitle>
+        <DialogContent>
+          <Typography id="success-dialog-description">
+            Processing will begin shortly!
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseSuccessDialog} variant="contained" color="primary">
+            OK
           </Button>
         </DialogActions>
       </Dialog>
