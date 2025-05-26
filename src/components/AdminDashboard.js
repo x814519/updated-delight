@@ -76,7 +76,7 @@ import { Chat } from './ChatComponents';
 import StatusUpdateModal from './StatusUpdateModal';
 import WithdrawalRequestsManager from './WithdrawalRequestsManager';
 import { addDummyProducts } from '../utils/dummyProducts';
-import { useNotificationSound } from '../utils';
+import { useNotificationSound } from '../utils/notificationSound';
 
 const drawerWidth = 260;
 
