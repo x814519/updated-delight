@@ -1189,7 +1189,7 @@ const SellerDetailsModal = ({ open, seller, onClose }) => {
   );
 };
 
-const AdminDashboard = () => {
+const AdminDashboard = ({ setIsAdminConversations }) => {
   const navigate = useNavigate();
   const theme = useTheme();
   
@@ -1557,6 +1557,8 @@ const AdminDashboard = () => {
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
+    // Update the conversations state when switching tabs
+    setIsAdminConversations(tab === 'conversations');
     
     // Clear unread indicator when the Conversations tab is opened
     if (tab === "conversations" && unreadConversationsCount > 0) {
