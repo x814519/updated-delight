@@ -127,18 +127,6 @@ function AppContent({
   const location = useLocation();
   const isSellerDashboard = location.pathname === '/seller/dashboard';
   
-  // Add state to track if we're in admin conversations
-  const [isAdminConversations, setIsAdminConversations] = useState(false);
-
-  // Update the conversations state when location changes
-  useEffect(() => {
-    const isInAdminDashboard = location.pathname === '/admin/dashboard';
-    // We'll update this through a callback from AdminDashboard component
-    if (!isInAdminDashboard) {
-      setIsAdminConversations(false);
-    }
-  }, [location]);
-
   // Extract search term from URL query parameters (once on mount)
   useEffect(() => {
     // Only run on component mount to initialize the search term from URL
@@ -199,7 +187,7 @@ function AppContent({
 
   return (
     <>
-      {!isSellerDashboard && !isAdminConversations && (
+      {!isSellerDashboard && (
         <>
           <Navbar 
             isAdmin={isAdmin} 
@@ -215,8 +203,8 @@ function AppContent({
         </>
       )}
       <Container sx={{ 
-        padding: isSellerDashboard || isAdminConversations ? 0 : undefined,
-        maxWidth: isSellerDashboard || isAdminConversations ? '100%' : undefined
+        padding: isSellerDashboard ? 0 : undefined,
+        maxWidth: isSellerDashboard ? '100%' : undefined
       }}>
         <Routes>
           <Route path="/" element={<HomePage isAuthenticated={isAuthenticated} searchTerm={searchTerm} />} />
@@ -227,7 +215,7 @@ function AppContent({
           } />
           <Route path="/admin/dashboard" element={
             <ProtectedAdminRoute>
-              <AdminDashboard setIsAdminConversations={setIsAdminConversations} />
+              <AdminDashboard />
             </ProtectedAdminRoute>
           } />
 
