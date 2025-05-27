@@ -1,8 +1,18 @@
 {
   "version": 2,
-  "buildCommand": "CI=false npm run build",
+  "buildCommand": "chmod +x vercel-build.sh && ./vercel-build.sh",
   "outputDirectory": "build",
   "framework": "create-react-app",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build",
+        "zeroConfig": true
+      }
+    }
+  ],
   "routes": [
     {
       "src": "/static/(.*)",
