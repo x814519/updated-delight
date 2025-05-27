@@ -17,7 +17,7 @@ import Setup from './components/Setup';
 import { Container, CssBaseline, ThemeProvider, createTheme, Toolbar } from '@mui/material';
 import { auth } from './firebase';
 import { onAuthStateChanged } from 'firebase/auth';
-import { NotificationSoundProvider } from './utils';
+import { NotificationSoundProvider } from './utils/notificationSound';
 
 const theme = createTheme();
 
@@ -274,3 +274,4 @@ function AppContent({
 }
 
 export default App;
+
