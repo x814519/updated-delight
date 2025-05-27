@@ -72,7 +72,7 @@ import {
 } from '@mui/icons-material';
 import { db, auth } from '../firebase';
 import { collection, query, where, getDocs, doc, updateDoc, deleteDoc, setDoc, addDoc, orderBy, onSnapshot, serverTimestamp, getDoc, arrayUnion, arrayRemove, increment, documentId } from 'firebase/firestore';
-import Chat from './ChatComponents/Chat';
+import { Chat } from './ChatComponents';
 import StatusUpdateModal from './StatusUpdateModal';
 import WithdrawalRequestsManager from './WithdrawalRequestsManager';
 import { addDummyProducts } from '../utils/dummyProducts';
@@ -1189,7 +1189,7 @@ const SellerDetailsModal = ({ open, seller, onClose }) => {
   );
 };
 
-const AdminDashboard = ({ setIsAdminConversations }) => {
+const AdminDashboard = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   
@@ -1557,8 +1557,6 @@ const AdminDashboard = ({ setIsAdminConversations }) => {
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
-    // Update the conversations state when switching tabs
-    setIsAdminConversations(tab === 'conversations');
     
     // Clear unread indicator when the Conversations tab is opened
     if (tab === "conversations" && unreadConversationsCount > 0) {
